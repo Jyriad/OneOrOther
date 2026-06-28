@@ -93,6 +93,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				B10000060000000000000004 /* OneOrOtherShieldConfiguration.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,6 +295,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D10000060000000000000001 /* PBXTargetDependency */,
 			);
 			name = OneOrOther;
 			productName = OneOrOther;
