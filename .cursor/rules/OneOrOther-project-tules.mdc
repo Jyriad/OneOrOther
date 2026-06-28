@@ -1,0 +1,13 @@
+---
+alwaysApply: true
+---
+
+Build this as native SwiftUI, not Expo or React Native.
+Keep the design monochrome, tactical, and minimal.
+Use Safety Orange #FF5A00 only as an accent.
+Avoid gamification, streaks, rewards, playful copy, or “wellness app” language.
+Fix the cause of problems, not surface symptoms.
+Keep iOS, macOS, and shared logic clearly separated.
+Do not add backend services unless there is a clear need.
+Prefer simple Apple-native solutions over extra packages.
+Explain decisions in plain English because you are non-technical.
