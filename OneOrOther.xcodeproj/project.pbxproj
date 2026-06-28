@@ -1,0 +1,530 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B10000010000000000000001 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000001 /* AppConstants.swift */; };
+		B10000010000000000000002 /* LinkMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000002 /* LinkMessage.swift */; };
+		B10000010000000000000003 /* DecisionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000003 /* DecisionEngine.swift */; };
+		B10000010000000000000004 /* SharedStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000004 /* SharedStateStore.swift */; };
+		B10000020000000000000001 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000001 /* AppConstants.swift */; };
+		B10000020000000000000002 /* LinkMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000002 /* LinkMessage.swift */; };
+		B10000020000000000000003 /* DecisionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000003 /* DecisionEngine.swift */; };
+		B10000020000000000000004 /* SharedStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000004 /* SharedStateStore.swift */; };
+		B10000020000000000000005 /* OneOrOtherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000020000000000000001 /* OneOrOtherApp.swift */; };
+		B10000020000000000000006 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000020000000000000002 /* ContentView.swift */; };
+		B10000020000000000000007 /* PhoneLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000020000000000000003 /* PhoneLinkManager.swift */; };
+		B10000020000000000000008 /* PhoneStateMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000020000000000000004 /* PhoneStateMonitor.swift */; };
+		B10000020000000000000009 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000020000000000000005 /* AuthorizationManager.swift */; };
+		B10000020000000000000010 /* ShieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000020000000000000006 /* ShieldController.swift */; };
+		B10000020000000000000011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F10000020000000000000007 /* Assets.xcassets */; };
+		B10000030000000000000005 /* OneOrOtherMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000030000000000000001 /* OneOrOtherMacApp.swift */; };
+		B10000030000000000000006 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000030000000000000002 /* MenuBarView.swift */; };
+		B10000030000000000000007 /* MacLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000030000000000000003 /* MacLinkManager.swift */; };
+		B10000030000000000000008 /* MacStateMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000030000000000000004 /* MacStateMonitor.swift */; };
+		B10000030000000000000009 /* BlurOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000030000000000000005 /* BlurOverlayController.swift */; };
+		B10000030000000000000010 /* BlurOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000030000000000000006 /* BlurOverlayView.swift */; };
+		B10000030000000000000011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F10000030000000000000007 /* Assets.xcassets */; };
+		B10000030000000000000012 /* FamilyControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000040000000000000001 /* FamilyControls.framework */; };
+		B10000030000000000000013 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000040000000000000002 /* ManagedSettings.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F10000010000000000000001 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		F10000010000000000000002 /* LinkMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkMessage.swift; sourceTree = "<group>"; };
+		F10000010000000000000003 /* DecisionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionEngine.swift; sourceTree = "<group>"; };
+		F10000010000000000000004 /* SharedStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStateStore.swift; sourceTree = "<group>"; };
+		F10000020000000000000001 /* OneOrOtherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneOrOtherApp.swift; sourceTree = "<group>"; };
+		F10000020000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F10000020000000000000003 /* PhoneLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLinkManager.swift; sourceTree = "<group>"; };
+		F10000020000000000000004 /* PhoneStateMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneStateMonitor.swift; sourceTree = "<group>"; };
+		F10000020000000000000005 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
+		F10000020000000000000006 /* ShieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldController.swift; sourceTree = "<group>"; };
+		F10000020000000000000007 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F10000020000000000000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F10000020000000000000009 /* OneOrOther.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneOrOther.entitlements; sourceTree = "<group>"; };
+		F10000020000000000000010 /* OneOrOther.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneOrOther.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10000030000000000000001 /* OneOrOtherMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneOrOtherMacApp.swift; sourceTree = "<group>"; };
+		F10000030000000000000002 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		F10000030000000000000003 /* MacLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacLinkManager.swift; sourceTree = "<group>"; };
+		F10000030000000000000004 /* MacStateMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacStateMonitor.swift; sourceTree = "<group>"; };
+		F10000030000000000000005 /* BlurOverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurOverlayController.swift; sourceTree = "<group>"; };
+		F10000030000000000000006 /* BlurOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurOverlayView.swift; sourceTree = "<group>"; };
+		F10000030000000000000007 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F10000030000000000000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F10000030000000000000009 /* OneOrOtherMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneOrOtherMac.entitlements; sourceTree = "<group>"; };
+		F10000030000000000000010 /* OneOrOtherMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneOrOtherMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10000040000000000000001 /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
+		F10000040000000000000002 /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		P10000020000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000030000000000000012 /* FamilyControls.framework in Frameworks */,
+				B10000030000000000000013 /* ManagedSettings.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		P10000030000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G10000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				G10000010000000000000001 /* Shared */,
+				G10000020000000000000001 /* iOS-app */,
+				G10000030000000000000001 /* macOS-app */,
+				G10000040000000000000001 /* Products */,
+				G10000050000000000000001 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		G10000010000000000000001 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				F10000010000000000000001 /* AppConstants.swift */,
+				F10000010000000000000002 /* LinkMessage.swift */,
+				F10000010000000000000003 /* DecisionEngine.swift */,
+				F10000010000000000000004 /* SharedStateStore.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		G10000020000000000000001 /* iOS-app */ = {
+			isa = PBXGroup;
+			children = (
+				F10000020000000000000001 /* OneOrOtherApp.swift */,
+				G10000020000000000000002 /* Views */,
+				G10000020000000000000003 /* Bluetooth */,
+				G10000020000000000000004 /* State */,
+				G10000020000000000000005 /* Blocking */,
+				F10000020000000000000007 /* Assets.xcassets */,
+				F10000020000000000000008 /* Info.plist */,
+				F10000020000000000000009 /* OneOrOther.entitlements */,
+			);
+			path = "iOS-app";
+			sourceTree = "<group>";
+		};
+		G10000020000000000000002 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F10000020000000000000002 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		G10000020000000000000003 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				F10000020000000000000003 /* PhoneLinkManager.swift */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		G10000020000000000000004 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				F10000020000000000000004 /* PhoneStateMonitor.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		G10000020000000000000005 /* Blocking */ = {
+			isa = PBXGroup;
+			children = (
+				F10000020000000000000005 /* AuthorizationManager.swift */,
+				F10000020000000000000006 /* ShieldController.swift */,
+			);
+			path = Blocking;
+			sourceTree = "<group>";
+		};
+		G10000030000000000000001 /* macOS-app */ = {
+			isa = PBXGroup;
+			children = (
+				F10000030000000000000001 /* OneOrOtherMacApp.swift */,
+				G10000030000000000000002 /* Views */,
+				G10000030000000000000003 /* Bluetooth */,
+				G10000030000000000000004 /* State */,
+				G10000030000000000000005 /* Overlay */,
+				F10000030000000000000007 /* Assets.xcassets */,
+				F10000030000000000000008 /* Info.plist */,
+				F10000030000000000000009 /* OneOrOtherMac.entitlements */,
+			);
+			path = "macOS-app";
+			sourceTree = "<group>";
+		};
+		G10000030000000000000002 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F10000030000000000000002 /* MenuBarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		G10000030000000000000003 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				F10000030000000000000003 /* MacLinkManager.swift */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		G10000030000000000000004 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				F10000030000000000000004 /* MacStateMonitor.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		G10000030000000000000005 /* Overlay */ = {
+			isa = PBXGroup;
+			children = (
+				F10000030000000000000005 /* BlurOverlayController.swift */,
+				F10000030000000000000006 /* BlurOverlayView.swift */,
+			);
+			path = Overlay;
+			sourceTree = "<group>";
+		};
+		G10000040000000000000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F10000020000000000000010 /* OneOrOther.app */,
+				F10000030000000000000010 /* OneOrOtherMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		G10000050000000000000001 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F10000040000000000000001 /* FamilyControls.framework */,
+				F10000040000000000000002 /* ManagedSettings.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		T10000020000000000000001 /* OneOrOther */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C10000020000000000000003 /* Build configuration list for PBXNativeTarget "OneOrOther" */;
+			buildPhases = (
+				P10000020000000000000002 /* Sources */,
+				P10000020000000000000001 /* Frameworks */,
+				P10000020000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneOrOther;
+			productName = OneOrOther;
+			productReference = F10000020000000000000010 /* OneOrOther.app */;
+			productType = "com.apple.product-type.application";
+		};
+		T10000030000000000000001 /* OneOrOtherMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C10000030000000000000003 /* Build configuration list for PBXNativeTarget "OneOrOtherMac" */;
+			buildPhases = (
+				P10000030000000000000002 /* Sources */,
+				P10000030000000000000001 /* Frameworks */,
+				P10000030000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneOrOtherMac;
+			productName = OneOrOtherMac;
+			productReference = F10000030000000000000010 /* OneOrOtherMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		PR1000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					T10000020000000000000001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					T10000030000000000000001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = C10000010000000000000001 /* Build configuration list for PBXProject "OneOrOther" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = G10000000000000000000001;
+			productRefGroup = G10000040000000000000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				T10000020000000000000001 /* OneOrOther */,
+				T10000030000000000000001 /* OneOrOtherMac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		P10000020000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000020000000000000011 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		P10000030000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000030000000000000011 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		P10000020000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000020000000000000005 /* OneOrOtherApp.swift in Sources */,
+				B10000020000000000000006 /* ContentView.swift in Sources */,
+				B10000020000000000000007 /* PhoneLinkManager.swift in Sources */,
+				B10000020000000000000008 /* PhoneStateMonitor.swift in Sources */,
+				B10000020000000000000009 /* AuthorizationManager.swift in Sources */,
+				B10000020000000000000010 /* ShieldController.swift in Sources */,
+				B10000010000000000000001 /* AppConstants.swift in Sources */,
+				B10000010000000000000002 /* LinkMessage.swift in Sources */,
+				B10000010000000000000003 /* DecisionEngine.swift in Sources */,
+				B10000010000000000000004 /* SharedStateStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		P10000030000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000030000000000000005 /* OneOrOtherMacApp.swift in Sources */,
+				B10000030000000000000006 /* MenuBarView.swift in Sources */,
+				B10000030000000000000007 /* MacLinkManager.swift in Sources */,
+				B10000030000000000000008 /* MacStateMonitor.swift in Sources */,
+				B10000030000000000000009 /* BlurOverlayController.swift in Sources */,
+				B10000030000000000000010 /* BlurOverlayView.swift in Sources */,
+				B10000020000000000000001 /* AppConstants.swift in Sources */,
+				B10000020000000000000002 /* LinkMessage.swift in Sources */,
+				B10000020000000000000003 /* DecisionEngine.swift in Sources */,
+				B10000020000000000000004 /* SharedStateStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		X10000010000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = auto;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		X10000010000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = auto;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		X10000020000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = "iOS-app/OneOrOther.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "iOS-app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyriad.oneorother;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		X10000020000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = "iOS-app/OneOrOther.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "iOS-app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyriad.oneorother;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		X10000030000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = "macOS-app/OneOrOtherMac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "macOS-app/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyriad.oneorother.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		X10000030000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = "macOS-app/OneOrOtherMac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "macOS-app/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyriad.oneorother.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C10000010000000000000001 /* Build configuration list for PBXProject "OneOrOther" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X10000010000000000000001 /* Debug */,
+				X10000010000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C10000020000000000000003 /* Build configuration list for PBXNativeTarget "OneOrOther" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X10000020000000000000001 /* Debug */,
+				X10000020000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C10000030000000000000003 /* Build configuration list for PBXNativeTarget "OneOrOtherMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X10000030000000000000001 /* Debug */,
+				X10000030000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = PR1000000000000000000001 /* Project object */;
+}
