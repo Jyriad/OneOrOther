@@ -12,13 +12,13 @@ final class ShieldController: ObservableObject {
         store.shield.applicationCategories = .all()
         store.shield.webDomainCategories = .all()
         isShieldActive = true
-        print("[ShieldController] whole-phone shield applied")
+        Log.line("ShieldController", "whole-phone shield applied")
     }
 
     func removeShield() {
         guard isShieldActive else { return }
         store.clearAllSettings()
         isShieldActive = false
-        print("[ShieldController] shield removed")
+        Log.line("ShieldController", "shield removed")
     }
 }

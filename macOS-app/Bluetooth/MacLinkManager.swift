@@ -68,14 +68,21 @@ final class MacLinkManager: NSObject, ObservableObject {
 
         let service = CBMutableService(type: CBUUID(string: AppConstants.serviceUUID), primary: true)
         service.characteristics = [characteristic]
+        peripheralManager.removeAllServices()
         peripheralManager.add(service)
 
+        startAdvertising()
+    }
+
+    private func startAdvertising() {
+        guard peripheralManager.state == .poweredOn else { return }
+        guard !peripheralManager.isAdvertising else { return }
         peripheralManager.startAdvertising([
             CBAdvertisementDataServiceUUIDsKey: [CBUUID(string: AppConstants.serviceUUID)],
             CBAdvertisementDataLocalNameKey: "OneOrOther Mac"
         ])
         statusText = "Advertising for iPhone…"
-        print("[MacLinkManager] advertising started")
+        Log.line("MacLinkManager", "advertising started")
     }
 
     private func startHeartbeatTimer() {
@@ -105,7 +112,7 @@ extension MacLinkManager: CBPeripheralManagerDelegate {
     nonisolated func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         Task { @MainActor in
             bluetoothState = peripheral.state
-            print("[MacLinkManager] peripheral state = \(peripheral.state.rawValue)")
+            Log.line("MacLinkManager", "peripheral state = \(peripheral.state.rawValue)")
             switch peripheral.state {
             case .poweredOn:
                 setupService()
@@ -133,7 +140,7 @@ extension MacLinkManager: CBPeripheralManagerDelegate {
             }
             remotePeer.isConnected = true
             statusText = "iPhone connected"
-            print("[MacLinkManager] iPhone subscribed")
+            Log.line("MacLinkManager", "iPhone subscribed")
             broadcastState()
             onRemoteStateUpdated?()
         }
@@ -146,7 +153,8 @@ extension MacLinkManager: CBPeripheralManagerDelegate {
                 remotePeer = RemotePeerState(isConnected: false)
                 statusText = "Waiting for iPhone…"
             }
-            print("[MacLinkManager] iPhone unsubscribed")
+            Log.line("MacLinkManager", "iPhone unsubscribed — re-advertising")
+            startAdvertising()
             onRemoteStateUpdated?()
         }
     }

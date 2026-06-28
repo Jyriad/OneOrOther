@@ -4,22 +4,31 @@ import Foundation
 final class SharedStateStore {
     static let shared = SharedStateStore()
 
-    private let defaults: UserDefaults?
+    private let defaults: UserDefaults
+    private let usesAppGroup: Bool
 
     private init() {
-        defaults = UserDefaults(suiteName: AppConstants.appGroupID)
+        if let groupDefaults = UserDefaults(suiteName: AppConstants.appGroupID) {
+            defaults = groupDefaults
+            usesAppGroup = true
+            Log.boot("SharedStateStore using App Group \(AppConstants.appGroupID)")
+        } else {
+            defaults = .standard
+            usesAppGroup = false
+            Log.line("SharedStateStore", "App Group unavailable — using standard defaults for this session")
+        }
     }
 
     var masterEnabled: Bool {
         get {
-            if defaults?.object(forKey: AppConstants.masterEnabledKey) == nil {
+            if defaults.object(forKey: AppConstants.masterEnabledKey) == nil {
                 return true
             }
-            return defaults?.bool(forKey: AppConstants.masterEnabledKey) ?? true
+            return defaults.bool(forKey: AppConstants.masterEnabledKey)
         }
         set {
-            defaults?.set(newValue, forKey: AppConstants.masterEnabledKey)
-            print("[SharedStateStore] masterEnabled = \(newValue)")
+            defaults.set(newValue, forKey: AppConstants.masterEnabledKey)
+            Log.line("SharedStateStore", "masterEnabled = \(newValue) (appGroup=\(usesAppGroup))")
         }
     }
 }

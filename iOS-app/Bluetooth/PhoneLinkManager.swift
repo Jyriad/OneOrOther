@@ -7,20 +7,29 @@ import UIKit
 final class PhoneLinkManager: NSObject, ObservableObject {
     @Published private(set) var bluetoothState: CBManagerState = .unknown
     @Published private(set) var remotePeer = RemotePeerState(isConnected: false)
-    @Published private(set) var statusText = "Bluetooth initializing…"
+    @Published private(set) var statusText = "Bluetooth waiting to start…"
 
     var onRemoteStateUpdated: (() -> Void)?
 
-    private var central: CBCentralManager!
+    private var central: CBCentralManager?
     private var peripheral: CBPeripheral?
+    private var pendingRestorePeripheral: CBPeripheral?
     private var stateCharacteristic: CBCharacteristic?
-    private var heartbeatTimer: Timer?
     private var staleCheckTimer: Timer?
+    private var isStarted = false
 
     private let restoreID = "com.jyriad.oneorother.phone.central"
 
     override init() {
         super.init()
+        Log.boot("PhoneLinkManager created (BLE not started yet)")
+    }
+
+    func start() {
+        guard !isStarted else { return }
+        isStarted = true
+        statusText = "Bluetooth initializing…"
+        Log.boot("PhoneLinkManager starting CBCentralManager")
         central = CBCentralManager(
             delegate: self,
             queue: nil,
@@ -45,44 +54,45 @@ final class PhoneLinkManager: NSObject, ObservableObject {
         peripheral.writeValue(data, for: characteristic, type: .withResponse)
     }
 
-    private func startHeartbeat(localActive: Bool, masterEnabled: Bool) {
-        heartbeatTimer?.invalidate()
-        heartbeatTimer = Timer.scheduledTimer(withTimeInterval: AppConstants.heartbeatInterval, repeats: true) { [weak self] _ in
-            Task { @MainActor in
-                self?.updateLocalState(deviceActive: localActive, masterEnabled: masterEnabled)
-            }
-        }
-    }
-
-    func bindHeartbeat(to deviceActivePublisher: Published<Bool>.Publisher, masterEnabled: @escaping () -> Bool) {
-        heartbeatTimer?.invalidate()
-        var lastActive = false
-        var cancellable: AnyCancellable?
-        cancellable = deviceActivePublisher.sink { [weak self] active in
-            lastActive = active
-            Task { @MainActor in
-                self?.updateLocalState(deviceActive: active, masterEnabled: masterEnabled())
-            }
-        }
-        _ = cancellable
-        heartbeatTimer = Timer.scheduledTimer(withTimeInterval: AppConstants.heartbeatInterval, repeats: true) { [weak self] _ in
-            Task { @MainActor in
-                self?.updateLocalState(deviceActive: lastActive, masterEnabled: masterEnabled())
-            }
-        }
-    }
-
     private func startStaleCheckTimer() {
         staleCheckTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             Task { @MainActor in
                 guard let self else { return }
                 if self.remotePeer.isConnected && !self.remotePeer.isHeartbeatFresh {
-                    print("[PhoneLinkManager] heartbeat stale — marking link uncertain")
+                    Log.line("PhoneLinkManager", "heartbeat stale — marking link uncertain")
                     self.statusText = "Link uncertain (stale heartbeat)"
                     self.onRemoteStateUpdated?()
                 }
             }
         }
+    }
+
+    private func beginScanOrReconnect(central: CBCentralManager) {
+        if let pending = pendingRestorePeripheral {
+            Log.line("PhoneLinkManager", "reconnecting to restored Mac peripheral")
+            peripheral = pending
+            pending.delegate = self
+            pendingRestorePeripheral = nil
+            statusText = pending.state == .connected ? "Connected to Mac" : "Reconnecting to Mac…"
+            if pending.state != .connected {
+                central.connect(pending, options: nil)
+            } else {
+                remotePeer.isConnected = true
+                pending.discoverServices([serviceUUID()])
+            }
+            return
+        }
+
+        if let peripheral, peripheral.state == .connected || peripheral.state == .connecting {
+            statusText = peripheral.state == .connected ? "Connected to Mac" : "Connecting to Mac…"
+            return
+        }
+
+        statusText = "Scanning for Mac…"
+        central.scanForPeripherals(
+            withServices: [serviceUUID()],
+            options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
+        )
     }
 
     private func serviceUUID() -> CBUUID {
@@ -98,14 +108,10 @@ extension PhoneLinkManager: CBCentralManagerDelegate {
     nonisolated func centralManagerDidUpdateState(_ central: CBCentralManager) {
         Task { @MainActor in
             bluetoothState = central.state
-            print("[PhoneLinkManager] central state = \(central.state.rawValue)")
+            Log.line("PhoneLinkManager", "central state = \(central.state.rawValue)")
             switch central.state {
             case .poweredOn:
-                statusText = "Scanning for Mac…"
-                central.scanForPeripherals(
-                    withServices: [serviceUUID()],
-                    options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
-                )
+                beginScanOrReconnect(central: central)
             case .poweredOff:
                 statusText = "Bluetooth off"
                 remotePeer.isConnected = false
@@ -119,42 +125,42 @@ extension PhoneLinkManager: CBCentralManagerDelegate {
     }
 
     nonisolated func centralManager(_ central: CBCentralManager, willRestoreState dict: [String: Any]) {
-        print("[PhoneLinkManager] state restoration triggered")
-        if let peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] {
-            for p in peripherals {
-                Task { @MainActor in
-                    self.peripheral = p
-                    p.delegate = self
-                    if p.state == .connected || p.state == .connecting {
-                        remotePeer.isConnected = p.state == .connected
-                        statusText = "Restoring Mac connection…"
-                    }
-                    central.connect(p, options: nil)
-                }
+        Log.line("PhoneLinkManager", "state restoration triggered — deferring reconnect until powered on")
+        if let peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral],
+           let restored = peripherals.first {
+            Task { @MainActor in
+                self.pendingRestorePeripheral = restored
+                restored.delegate = self
+                self.statusText = "Restoring Mac connection…"
             }
         }
     }
 
     nonisolated func centralManager(
         _ central: CBCentralManager,
-        didDiscover peripheral: CBPeripheral,
+        didDiscover discovered: CBPeripheral,
         advertisementData: [String: Any],
         rssi RSSI: NSNumber
     ) {
         Task { @MainActor in
-            guard self.peripheral == nil else { return }
-            print("[PhoneLinkManager] discovered Mac peripheral")
-            self.peripheral = peripheral
-            peripheral.delegate = self
+            if let existing = self.peripheral,
+               existing.identifier != discovered.identifier,
+               existing.state == .connected || existing.state == .connecting {
+                return
+            }
+
+            Log.line("PhoneLinkManager", "discovered Mac peripheral")
+            self.peripheral = discovered
+            discovered.delegate = self
             statusText = "Connecting to Mac…"
             central.stopScan()
-            central.connect(peripheral, options: nil)
+            central.connect(discovered, options: nil)
         }
     }
 
     nonisolated func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         Task { @MainActor in
-            print("[PhoneLinkManager] connected to Mac")
+            Log.line("PhoneLinkManager", "connected to Mac")
             remotePeer.isConnected = true
             statusText = "Connected to Mac"
             peripheral.discoverServices([serviceUUID()])
@@ -164,13 +170,17 @@ extension PhoneLinkManager: CBCentralManagerDelegate {
 
     nonisolated func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         Task { @MainActor in
-            print("[PhoneLinkManager] disconnected from Mac error=\(error?.localizedDescription ?? "none")")
+            Log.line("PhoneLinkManager", "disconnected from Mac error=\(error?.localizedDescription ?? "none")")
             remotePeer = RemotePeerState(isConnected: false)
-            self.peripheral = nil
             stateCharacteristic = nil
-            statusText = "Disconnected — scanning…"
+            statusText = "Reconnecting to Mac…"
             if central.state == .poweredOn {
-                central.scanForPeripherals(withServices: [serviceUUID()], options: nil)
+                self.peripheral = peripheral
+                peripheral.delegate = self
+                central.connect(peripheral, options: nil)
+            } else {
+                self.pendingRestorePeripheral = peripheral
+                self.peripheral = nil
             }
             onRemoteStateUpdated?()
         }
@@ -178,7 +188,7 @@ extension PhoneLinkManager: CBCentralManagerDelegate {
 
     nonisolated func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         Task { @MainActor in
-            print("[PhoneLinkManager] failed to connect error=\(error?.localizedDescription ?? "none")")
+            Log.line("PhoneLinkManager", "failed to connect error=\(error?.localizedDescription ?? "none")")
             statusText = "Connection failed — retrying scan…"
             self.peripheral = nil
             if central.state == .poweredOn {
@@ -192,7 +202,7 @@ extension PhoneLinkManager: CBPeripheralDelegate {
     nonisolated func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         Task { @MainActor in
             guard error == nil else {
-                print("[PhoneLinkManager] discover services error=\(error!)")
+                Log.line("PhoneLinkManager", "discover services error=\(error!.localizedDescription)")
                 return
             }
             guard let service = peripheral.services?.first(where: { $0.uuid == serviceUUID() }) else { return }
@@ -206,7 +216,7 @@ extension PhoneLinkManager: CBPeripheralDelegate {
             guard let characteristic = service.characteristics?.first(where: { $0.uuid == stateUUID() }) else { return }
             stateCharacteristic = characteristic
             peripheral.setNotifyValue(true, for: characteristic)
-            print("[PhoneLinkManager] subscribed to Mac state characteristic")
+            Log.line("PhoneLinkManager", "subscribed to Mac state characteristic")
         }
     }
 
@@ -217,14 +227,14 @@ extension PhoneLinkManager: CBPeripheralDelegate {
             remotePeer.lastReceivedAt = Date()
             remotePeer.isConnected = true
             statusText = "Mac: \(message.deviceActive ? "active" : "idle")"
-            print("[PhoneLinkManager] received \(message.kind.rawValue) macActive=\(message.deviceActive)")
+            Log.line("PhoneLinkManager", "received \(message.kind.rawValue) macActive=\(message.deviceActive)")
             onRemoteStateUpdated?()
         }
     }
 
     nonisolated func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         if let error {
-            print("[PhoneLinkManager] write error=\(error.localizedDescription)")
+            Log.line("PhoneLinkManager", "write error=\(error.localizedDescription)")
         }
     }
 }

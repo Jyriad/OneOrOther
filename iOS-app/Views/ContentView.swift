@@ -17,6 +17,10 @@ struct ContentView: View {
             .padding(24)
         }
         .preferredColorScheme(.dark)
+        .onAppear {
+            Log.boot("ContentView appeared")
+            coordinator.start()
+        }
         .onChange(of: coordinator.phoneState.isUnlocked) { _, _ in
             coordinator.reevaluate()
         }

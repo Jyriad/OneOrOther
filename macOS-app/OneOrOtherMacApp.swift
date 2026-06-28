@@ -23,9 +23,12 @@ final class MacAppCoordinator: ObservableObject {
     let macState = MacStateMonitor()
     let linkManager = MacLinkManager()
     let overlayController = BlurOverlayController()
+    private let activityManager = ActivityManager()
 
     private var heartbeatTimer: Timer?
     private var decisionTimer: Timer?
+    private var linkGraceClearTask: Task<Void, Never>?
+    private let linkGracePeriod: TimeInterval = 4.0
 
     init() {
         masterEnabled = SharedStateStore.shared.masterEnabled
@@ -34,7 +37,16 @@ final class MacAppCoordinator: ObservableObject {
                 self?.reevaluate()
             }
         }
+        applyActivityState()
         startTimers()
+    }
+
+    private func applyActivityState() {
+        if masterEnabled {
+            activityManager.begin()
+        } else {
+            activityManager.end()
+        }
     }
 
     private func startTimers() {
@@ -57,6 +69,7 @@ final class MacAppCoordinator: ObservableObject {
     func setMasterEnabled(_ enabled: Bool) {
         masterEnabled = enabled
         SharedStateStore.shared.masterEnabled = enabled
+        applyActivityState()
         linkManager.updateLocalState(deviceActive: macState.isActive, masterEnabled: enabled)
         reevaluate()
     }
@@ -75,10 +88,42 @@ final class MacAppCoordinator: ObservableObject {
 
         switch decision {
         case .block:
+            linkGraceClearTask?.cancel()
+            linkGraceClearTask = nil
             overlayController.show()
         case .clear:
-            overlayController.hide()
+            handleClearDecision(decision)
         }
+    }
+
+    private func handleClearDecision(_ decision: BlockDecision) {
+        guard case .clear(let reason) = decision else { return }
+
+        // If the overlay is already visible and only the BLE heartbeat blipped,
+        // keep it up briefly. This avoids a distracting unlock/relock flicker
+        // during short reconnects without masking true user intent changes.
+        if overlayController.isVisible && reason == "Bluetooth link uncertain" {
+            guard linkGraceClearTask == nil else { return }
+            Log.line("MacAppCoordinator", "holding overlay during Bluetooth grace period")
+            linkGraceClearTask = Task { [weak self] in
+                try? await Task.sleep(nanoseconds: UInt64(self?.linkGracePeriod ?? 4.0) * 1_000_000_000)
+                guard !Task.isCancelled else { return }
+                await MainActor.run {
+                    guard let self else { return }
+                    self.linkGraceClearTask = nil
+                    if case .clear(let currentReason) = self.blockDecision,
+                       currentReason == "Bluetooth link uncertain" {
+                        Log.line("MacAppCoordinator", "grace period expired — clearing overlay")
+                        self.overlayController.hide()
+                    }
+                }
+            }
+            return
+        }
+
+        linkGraceClearTask?.cancel()
+        linkGraceClearTask = nil
+        overlayController.hide()
     }
 
     private func decisionStatus(_ decision: BlockDecision, remote: RemotePeerState) -> String {

@@ -31,13 +31,32 @@
 		B10000030000000000000011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F10000030000000000000007 /* Assets.xcassets */; };
 		B10000030000000000000012 /* FamilyControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000040000000000000001 /* FamilyControls.framework */; };
 		B10000030000000000000013 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000040000000000000002 /* ManagedSettings.framework */; };
+		B10000010000000000000005 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000005 /* Log.swift */; };
+		B10000020000000000000020 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000010000000000000005 /* Log.swift */; };
+		B10000030000000000000020 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000030000000000000020 /* ActivityManager.swift */; };
+		B10000060000000000000001 /* ShieldConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000060000000000000001 /* ShieldConfigurationExtension.swift */; };
+		B10000060000000000000002 /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000040000000000000003 /* ManagedSettingsUI.framework */; };
+		B10000060000000000000003 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10000040000000000000002 /* ManagedSettings.framework */; };
+		B10000060000000000000004 /* OneOrOtherShieldConfiguration.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F10000060000000000000004 /* OneOrOtherShieldConfiguration.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		X10000060000000000000020 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = PR1000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = T10000060000000000000001;
+			remoteInfo = OneOrOtherShieldConfiguration;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F10000010000000000000001 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F10000010000000000000002 /* LinkMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkMessage.swift; sourceTree = "<group>"; };
 		F10000010000000000000003 /* DecisionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionEngine.swift; sourceTree = "<group>"; };
 		F10000010000000000000004 /* SharedStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStateStore.swift; sourceTree = "<group>"; };
+		F10000010000000000000005 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		F10000030000000000000020 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		F10000020000000000000001 /* OneOrOtherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneOrOtherApp.swift; sourceTree = "<group>"; };
 		F10000020000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F10000020000000000000003 /* PhoneLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLinkManager.swift; sourceTree = "<group>"; };
@@ -60,7 +79,25 @@
 		F10000030000000000000010 /* OneOrOtherMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneOrOtherMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10000040000000000000001 /* FamilyControls.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FamilyControls.framework; path = System/Library/Frameworks/FamilyControls.framework; sourceTree = SDKROOT; };
 		F10000040000000000000002 /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
+		F10000040000000000000003 /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = System/Library/Frameworks/ManagedSettingsUI.framework; sourceTree = SDKROOT; };
+		F10000060000000000000001 /* ShieldConfigurationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldConfigurationExtension.swift; sourceTree = "<group>"; };
+		F10000060000000000000002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F10000060000000000000003 /* ShieldConfigurationExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShieldConfigurationExtension.entitlements; sourceTree = "<group>"; };
+		F10000060000000000000004 /* OneOrOtherShieldConfiguration.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneOrOtherShieldConfiguration.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		P10000020000000000000004 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		P10000020000000000000001 /* Frameworks */ = {
@@ -79,6 +116,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		P10000060000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000060000000000000002 /* ManagedSettingsUI.framework in Frameworks */,
+				B10000060000000000000003 /* ManagedSettings.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -87,6 +133,7 @@
 			children = (
 				G10000010000000000000001 /* Shared */,
 				G10000020000000000000001 /* iOS-app */,
+				G10000060000000000000001 /* ShieldConfigurationExtension */,
 				G10000030000000000000001 /* macOS-app */,
 				G10000040000000000000001 /* Products */,
 				G10000050000000000000001 /* Frameworks */,
@@ -100,6 +147,7 @@
 				F10000010000000000000002 /* LinkMessage.swift */,
 				F10000010000000000000003 /* DecisionEngine.swift */,
 				F10000010000000000000004 /* SharedStateStore.swift */,
+				F10000010000000000000005 /* Log.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -167,6 +215,16 @@
 			path = "macOS-app";
 			sourceTree = "<group>";
 		};
+		G10000060000000000000001 /* ShieldConfigurationExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F10000060000000000000001 /* ShieldConfigurationExtension.swift */,
+				F10000060000000000000002 /* Info.plist */,
+				F10000060000000000000003 /* ShieldConfigurationExtension.entitlements */,
+			);
+			path = "iOS-app/ShieldConfigurationExtension";
+			sourceTree = "<group>";
+		};
 		G10000030000000000000002 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				F10000030000000000000004 /* MacStateMonitor.swift */,
+				F10000030000000000000020 /* ActivityManager.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -204,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				F10000020000000000000010 /* OneOrOther.app */,
+				F10000060000000000000004 /* OneOrOtherShieldConfiguration.appex */,
 				F10000030000000000000010 /* OneOrOtherMac.app */,
 			);
 			name = Products;
@@ -214,6 +274,7 @@
 			children = (
 				F10000040000000000000001 /* FamilyControls.framework */,
 				F10000040000000000000002 /* ManagedSettings.framework */,
+				F10000040000000000000003 /* ManagedSettingsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -228,6 +289,7 @@
 				P10000020000000000000002 /* Sources */,
 				P10000020000000000000001 /* Frameworks */,
 				P10000020000000000000003 /* Resources */,
+				P10000020000000000000004 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -255,7 +317,32 @@
 			productReference = F10000030000000000000010 /* OneOrOtherMac.app */;
 			productType = "com.apple.product-type.application";
 		};
+		T10000060000000000000001 /* OneOrOtherShieldConfiguration */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C10000060000000000000003 /* Build configuration list for PBXNativeTarget "OneOrOtherShieldConfiguration" */;
+			buildPhases = (
+				P10000060000000000000002 /* Sources */,
+				P10000060000000000000001 /* Frameworks */,
+				P10000060000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneOrOtherShieldConfiguration;
+			productName = OneOrOtherShieldConfiguration;
+			productReference = F10000060000000000000004 /* OneOrOtherShieldConfiguration.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
+
+/* Begin PBXTargetDependency section */
+		D10000060000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = T10000060000000000000001 /* OneOrOtherShieldConfiguration */;
+			targetProxy = X10000060000000000000020 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXProject section */
 		PR1000000000000000000001 /* Project object */ = {
@@ -269,6 +356,9 @@
 						CreatedOnToolsVersion = 16.0;
 					};
 					T10000030000000000000001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					T10000060000000000000001 = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
@@ -288,6 +378,7 @@
 			targets = (
 				T10000020000000000000001 /* OneOrOther */,
 				T10000030000000000000001 /* OneOrOtherMac */,
+				T10000060000000000000001 /* OneOrOtherShieldConfiguration */,
 			);
 		};
 /* End PBXProject section */
@@ -309,6 +400,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		P10000060000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -326,6 +424,7 @@
 				B10000010000000000000002 /* LinkMessage.swift in Sources */,
 				B10000010000000000000003 /* DecisionEngine.swift in Sources */,
 				B10000010000000000000004 /* SharedStateStore.swift in Sources */,
+				B10000010000000000000005 /* Log.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +442,16 @@
 				B10000020000000000000002 /* LinkMessage.swift in Sources */,
 				B10000020000000000000003 /* DecisionEngine.swift in Sources */,
 				B10000020000000000000004 /* SharedStateStore.swift in Sources */,
+				B10000020000000000000020 /* Log.swift in Sources */,
+				B10000030000000000000020 /* ActivityManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		P10000060000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000060000000000000001 /* ShieldConfigurationExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,7 +508,7 @@
 				CODE_SIGN_ENTITLEMENTS = "iOS-app/OneOrOther.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2BN57VC6T4;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "iOS-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -425,7 +534,7 @@
 				CODE_SIGN_ENTITLEMENTS = "iOS-app/OneOrOther.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2BN57VC6T4;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "iOS-app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -452,7 +561,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2BN57VC6T4;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "macOS-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -477,7 +586,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2BN57VC6T4;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "macOS-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -491,6 +600,66 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		X10000060000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = "iOS-app/ShieldConfigurationExtension/ShieldConfigurationExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BN57VC6T4;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "iOS-app/ShieldConfigurationExtension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyriad.oneorother.shieldconfiguration;
+				PRODUCT_BUNDLE_PACKAGE_TYPE = "XPC!";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = appex;
+			};
+			name = Debug;
+		};
+		X10000060000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = "iOS-app/ShieldConfigurationExtension/ShieldConfigurationExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BN57VC6T4;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "iOS-app/ShieldConfigurationExtension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jyriad.oneorother.shieldconfiguration;
+				PRODUCT_BUNDLE_PACKAGE_TYPE = "XPC!";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = appex;
 			};
 			name = Release;
 		};
@@ -520,6 +689,15 @@
 			buildConfigurations = (
 				X10000030000000000000001 /* Debug */,
 				X10000030000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C10000060000000000000003 /* Build configuration list for PBXNativeTarget "OneOrOtherShieldConfiguration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X10000060000000000000001 /* Debug */,
+				X10000060000000000000002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
